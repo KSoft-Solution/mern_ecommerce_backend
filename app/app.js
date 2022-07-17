@@ -1,4 +1,5 @@
-require('./config/db')
+require('./config/db.config')
+const routers = require('./routes/routes')
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -62,5 +63,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors());
+
+// Here our API Routes
+app.use(routers);
 
 module.exports = app

@@ -1,0 +1,44 @@
+POST http://localhost:8000/api/v1/product/createProduct HTTP/1.1
+content-type: application/json
+
+{
+    "name": "IPhone 13 Pro Max 1",
+    "description": "description 1",
+    "price": 1329000,
+    "ratings": 6,
+    "category": "Mobile 1",
+    "Stock": 20,
+    "numOfReviews": 13000,
+    "images":{
+       "public_id": "sample imageID",
+      "url": "sample imageURL"
+    }
+}
+
+
+###
+
+GET http://localhost:8000/api/v1/product/allProducts HTTP/1.1
+
+###
+
+PUT http://localhost:8000/api/v1/product/update/62d39a78eaf080bb1b2b2287 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "IPhone 13 Pro Max",
+    "description": "description",
+    "price": 13200,
+    "ratings": 5,
+    "category": "Mobile",
+    "Stock": 20,
+    "numOfReviews": 13000,
+    "images":{
+       "public_id": "sample imageID",
+      "url": "sample imageURL"
+    }
+}
+
+###
+
+DELETE  http://localhost:8000/api/v1/product/delete/62d3a268a303c8ca5459feb7 HTTP/1.1
