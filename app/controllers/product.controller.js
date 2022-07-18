@@ -25,8 +25,27 @@ const getAllProducts = asyncHandler(async (req, res, next) => {
     })
 });
 
+const getProductDetail = asyncHandler(async (req, res, next) => {
+    let product = await Product.findById(req.params.id)
+    if(!product){
+        res.status(StatusCodes?.BAD_REQUEST).json({
+            status:ReasonPhrases?.BAD_REQUEST,
+            success:false,
+            error: getReasonPhrase(StatusCodes.BAD_REQUEST),
+            message:"Product not found"
+        })
+    }
+    
+    res.status(StatusCodes?.OK).json({
+        status:ReasonPhrases?.OK,
+        success:true,
+        data:product
+    })
+
+});
+
 const updateProduct = asyncHandler(async(req,res,next)=>{
-    let product = Product.findById(req.params.id)
+    let product = await Product.findById(req.params.id)
     if(!product){
         res.status(StatusCodes?.BAD_REQUEST).json({
             status:ReasonPhrases?.BAD_REQUEST,
@@ -72,5 +91,6 @@ module.exports = {
   createProduct,
   getAllProducts,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  getProductDetail
 };

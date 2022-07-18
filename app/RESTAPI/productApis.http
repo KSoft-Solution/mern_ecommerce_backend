@@ -2,10 +2,10 @@ POST http://localhost:8000/api/v1/product/createProduct HTTP/1.1
 content-type: application/json
 
 {
-    "name": "IPhone 13 Pro Max 1",
-    "description": "description 1",
+    "name": "IPhone 13 Pro Max 2",
+    "description": "description 2",
     "price": 1329000,
-    "ratings": 6,
+    "ratings": 7,
     "category": "Mobile 1",
     "Stock": 20,
     "numOfReviews": 13000,
@@ -17,12 +17,16 @@ content-type: application/json
 
 
 ###
-
 GET http://localhost:8000/api/v1/product/allProducts HTTP/1.1
 
 ###
 
-PUT http://localhost:8000/api/v1/product/update/62d39a78eaf080bb1b2b2287 HTTP/1.1
+GET http://localhost:8000/api/v1/product/product/62d3a4d604de860f61bbc631 HTTP/1.1
+
+###
+
+
+PUT http://localhost:8000/api/v1/product/update/62d3a4d604de860f61bbc631 HTTP/1.1
 content-type: application/json
 
 {
@@ -41,4 +45,4 @@ content-type: application/json
 
 ###
 
-DELETE  http://localhost:8000/api/v1/product/delete/62d3a268a303c8ca5459feb7 HTTP/1.1
+DELETE  http://localhost:8000/api/v1/product/delete/62d3a4d604de860f61bbc631 HTTP/1.1
