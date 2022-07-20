@@ -2,7 +2,8 @@ POST http://localhost:8000/api/v1/product/createProduct HTTP/1.1
 content-type: application/json
 
 {
-    "name": "IPhone 13 Pro Max 2",
+    "name": "IPhone 13 Pro Max 3",
+    "email":"ashoksahu1105@gmail.com",
     "description": "description 2",
     "price": 1329000,
     "ratings": 7,

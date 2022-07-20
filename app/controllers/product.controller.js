@@ -6,9 +6,18 @@ const {
   getReasonPhrase,
   getStatusCode,
 } = require("http-status-codes");
+const sendEmail = require('../utils/mail.util')
 
 const createProduct = asyncHandler(async (req, res, next) => {    
     const product = await Product.create(req.body)
+
+    // await sendEmail(req.body.email, 'register', '', '', '')
+    // .then(() => {
+    //   res.status(StatusCodes.OK).send({
+    //     status: "success",
+    //     message: "Account Activation Link Sent To Your Mail",
+    //   });
+    // });
     res.status(StatusCodes?.CREATED).json({
         status:ReasonPhrases?.OK,
         success:true,
