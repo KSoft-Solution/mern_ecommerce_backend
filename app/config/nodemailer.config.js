@@ -2,26 +2,27 @@ const nodemailer = require("nodemailer");
 
 const sendMail = async (recipient, message) => {
   let transporter = nodemailer.createTransport({
+    service: 'gmail', 
+    auth: {
+      user: process.env.SENDER_EMAIL_ADDRESS, // email
+      pass: process.env.SENDER_EMAIL_PASSWORD, //password
+    },
     host: 'smtp.gmail.com',
     secureConnection: false, // TLS requires secureConnection to be false
-    port: 587,
+    port: process.env.EMAIL_PORT,
     secure: false,
-    logger: true,
+    // logger: true,
     debug: true,
     ignoreTLS: true,
-    auth: {
-      user: "kanhasahu955902@gmail.com",
-      pass: "kanhasahu$1111",
-    },
     tls: {
       ciphers: "SSLv3",
-    //   rejectUnauthorized: false,
+      rejectUnauthorized: false,
     },
-    // requireTLS: true,
+    requireTLS: true,
   });
 
   const data = {
-    from: `KSoft Solution <${process.env.SENDER_EMAIL_ADDRESS}>`,
+    from: `SriKrishna Bakery <${process.env.SENDER_EMAIL_ADDRESS}>`,
     to: recipient,
     subject: `${message.subject}`,
     text: `${message.text}`,

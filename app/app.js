@@ -1,4 +1,4 @@
-require('./config/db.config')
+require('./config/mongodb.config')
 const routers = require('./routes/routes')
 const express = require("express");
 const cors = require("cors");
