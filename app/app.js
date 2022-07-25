@@ -1,5 +1,6 @@
-require('./config/mongodb.config')
-const routers = require('./routes/routes')
+require("./config/mongodb.config");
+require('./config/cloudnary.config')
+const routers = require("./routes/routes");
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -9,6 +10,8 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+
+const errorMiddleware = require('./middlewares/error.middleware')
 
 const app = express();
 const mongoUrl = process.env.MONGODB_URI;
@@ -54,7 +57,12 @@ app.use(
   })
 );
 
-app.use(helmet.frameguard({ action: "DENY" }));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    frameguard: true,
+  })
+);
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 
@@ -66,5 +74,6 @@ app.use(cors());
 
 // Here our API Routes
 app.use(routers);
+app.use(errorMiddleware);
 
-module.exports = app
+module.exports = app;

@@ -38,7 +38,7 @@ const prepareTemplate = (type, host, data, token) => {
       break;
 
     case "register":
-      message = template.registerEmail(data);
+      message = template.registerEmail(data,token);
       break;
 
     case "newsletter-subscription":

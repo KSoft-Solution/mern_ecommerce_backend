@@ -34,20 +34,13 @@ const forgotPassword = (url) => {
   return message;
 };
 
-const registerEmail = (data) => {
+const registerEmail = (data,token) => {
   const message = {
-    subject: "Account Activation Link",
-    text: `Hi ! Thank you for creating an account with us!.`,
-    html:
-      "<div style =" +
-      "width:100%; height:100%;  " +
-      "><h1 style=" +
-      "font-weight:500>Hey, " +
-      data +
-      "<br>Welcome to KSoft Solution</h1><h1>Thanks for Signing up on our app</h1><h3>Your Code for verification is : " 
-      // token +
-      // " </h3></div><p>If this request is not made by you kindly ignore this mail.</p><p>Regards, <strong>Ashok Sahu(Owner)</strong></p>",
+    subject: "Account Registration",
+    text: `Hi ${data}! Thank you for creating an account with us!.`,
+    html: `<div style={"width:100%; height:100%;color:green"}><i style={color:'red'}>Hi ${data} ,</i> Welcome to Sri Krishna Bakery<br/><h1>Thanks for Signing up on our app<h3></h3></h1>Your tokenCode is :<b> ${token}</b></div><br/></h3></div><p>If this request is not made by you kindly ignore this mail.</p><p>Regards, <strong>Ashok Sahu(Owner)</strong></p>`,
   };
+
   return message;
 };
 

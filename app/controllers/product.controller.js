@@ -10,6 +10,9 @@ const sendEmail = require('../utils/mail.util')
 
 const createProduct = asyncHandler(async (req, res, next) => {    
     const product = await Product.create(req.body)
+    
+    sendEmail(req.body.email,'register','','','')
+
     res.status(StatusCodes?.CREATED).json({
         status:ReasonPhrases?.OK,
         success:true,
