@@ -44,11 +44,11 @@ const registerEmail = (data,token) => {
   return message;
 };
 
-const loginSuccess = (data) => {
+const login = (data) => {
   const message = {
-    subject: "Welcome To Bakerywala",
+    subject: "Welcome To Sri Krishna Bakery",
     text: `Hi ${data}! Thank you for your Interest In our Shop`,
-    html: `<b style={color:'red'}>${data}</b>`,
+    html: `Hi, <b style={color:'red'}>${data}</b> Thank you for your Interest In our Shop`,
   };
   return message;
 };
@@ -95,5 +95,5 @@ const orderConfirmationEmail = (order) => {
 
 module.exports = {
   registerEmail,
-  loginSuccess,
+  login,
 };

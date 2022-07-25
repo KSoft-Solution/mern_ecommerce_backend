@@ -33,9 +33,44 @@ const registerUser = asyncHandler(async (req, res, next) => {
       url: myCloud.secure_url,
     },
   });
-  sendToken(user, 201, res);
+  await sendToken(user, 201, res);
+});
+
+const loginUser = asyncHandler(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email) {
+    return next(
+      new Error("You must enter an email address.", StatusCodes?.BAD_REQUEST)
+    );
+  }
+
+  if (!password) {
+    return next(
+      new Error("You must enter a password", StatusCodes?.BAD_REQUEST)
+    );
+  }
+
+  const user = await User.findOne({ email }).select("+password")
+
+  if (!user) {
+    return next(
+      new Error(
+        "No user found for this email  and password",
+        StatusCodes?.UNAUTHORIZED
+      )
+    );
+  }
+  const isPasswordMatched = await bcrypt.compare(password, user.password);
+  if (!isPasswordMatched) {
+    return next(new Error("Password is incorrect", StatusCodes?.UNAUTHORIZED));
+  }
+
+  await sendEmail(email, "login", "", user.name, '');
+  await sendToken(user, 200, res);
 });
 
 module.exports = {
   registerUser,
+  loginUser,
 };

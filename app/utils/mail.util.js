@@ -25,8 +25,8 @@ const prepareTemplate = (type, host, data, token) => {
       message = template.resetEmail(host, data);
       break;
 
-    case "loginSuccess":
-      message = template.loginSuccess(data);
+    case "login":
+      message = template.login(data);
       break;
 
     case "forgotPassword":
