@@ -6,10 +6,18 @@ const { graphqlHTTP } = require("express-graphql");
 const { loadSchemaSync } = require("@graphql-tools/load");
 const { GraphQLFileLoader } = require("@graphql-tools/graphql-file-loader");
 const { addResolversToSchema } = require("@graphql-tools/schema");
-const app = require('./app/app')
+const { createServer } = require("http");
+const Server = require("socket.io");
+const app = require("./app/app");
+const SocketServer = require('./app/config/socket.config')
 
 const PORT = process.env.PORT || 5000;
-const server = http.createServer(app);
+const server = createServer(app);
+const io =  Server(http);
+
+io.on("connection", (socket) => {
+  SocketServer(socket);
+});
 
 const [major, minor] = process.versions.node.split(".").map(parseFloat);
 if (major < 7 || (major === 7 && minor <= 5)) {
@@ -26,10 +34,15 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-server.listen(PORT,()=>{
-    console.log(`server is listening on http://localhost:${PORT} - for REST`.green.bold)
-    console.log(`server is listening on http://localhost:${PORT}${process.env.GRAPHQL_URL} - for GRAPHQL`.green.bold)
-})
+server.listen(PORT, () => {
+  console.log(
+    `server is listening on http://localhost:${PORT} - for REST`.green.bold
+  );
+  console.log(
+    `server is listening on http://localhost:${PORT}${process.env.GRAPHQL_URL} - for GRAPHQL`
+      .green.bold
+  );
+});
 
 // Unhandled Promise Rejection
 process.on("unhandledRejection", (err) => {

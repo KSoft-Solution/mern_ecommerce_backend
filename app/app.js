@@ -1,5 +1,5 @@
 require("./config/mongodb.config");
-require('./config/cloudnary.config')
+require("./config/cloudnary.config");
 const routers = require("./routes/routes");
 const express = require("express");
 const cors = require("cors");
@@ -10,8 +10,9 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-
-const errorMiddleware = require('./middlewares/error.middleware')
+const flash = require("flash");
+const errorMiddleware = require("./middlewares/error.middleware");
+const errorHandlers = require('./helper/errorHandler')
 
 const app = express();
 const mongoUrl = process.env.MONGODB_URI;
@@ -63,6 +64,7 @@ app.use(
     frameguard: true,
   })
 );
+app.use(flash());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 

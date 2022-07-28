@@ -47,8 +47,8 @@ const registerEmail = (data,token) => {
 const login = (data) => {
   const message = {
     subject: "Welcome To Sri Krishna Bakery",
-    text: `Hi ${data}! Thank you for your Interest In our Shop`,
-    html: `Hi, <b style={color:'red'}>${data}</b> Thank you for your Interest In our Shop`,
+    text: `Thank you for your Interest In our Shop`,
+    html: `Hi, <b style={color:'red'}>${data}</b> Your Login Successfull`,
   };
   return message;
 };

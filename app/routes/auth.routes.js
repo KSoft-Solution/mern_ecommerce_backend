@@ -1,7 +1,14 @@
 const router = require("express").Router();
 const { registerUser, loginUser } = require("../controllers/user.controller");
-const upload = require("../config/multer.config");
+const {
+  validateLoginRequest,
+  isRequestValidated,
+  validateSignupRequest,
+} = require("../validator/auth.validatior");
 
-router.post("/register", registerUser).post("/login", loginUser);
+
+router
+  .post("/register", validateSignupRequest, isRequestValidated,registerUser)
+  .post("/login", validateLoginRequest, isRequestValidated, loginUser);
 
 module.exports = router;

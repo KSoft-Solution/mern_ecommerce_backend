@@ -33,26 +33,12 @@ const registerUser = asyncHandler(async (req, res, next) => {
       url: myCloud.secure_url,
     },
   });
-  await sendToken(user, 201, res);
+  await sendToken(user, StatusCodes?.CREATED, res, "register");
 });
 
 const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
-
-  if (!email) {
-    return next(
-      new Error("You must enter an email address.", StatusCodes?.BAD_REQUEST)
-    );
-  }
-
-  if (!password) {
-    return next(
-      new Error("You must enter a password", StatusCodes?.BAD_REQUEST)
-    );
-  }
-
-  const user = await User.findOne({ email }).select("+password")
-
+  const user = await User.findOne({ email }).select("+password");
   if (!user) {
     return next(
       new Error(
@@ -66,11 +52,15 @@ const loginUser = asyncHandler(async (req, res, next) => {
     return next(new Error("Password is incorrect", StatusCodes?.UNAUTHORIZED));
   }
 
-  await sendEmail(email, "login", "", user.name, '');
-  await sendToken(user, 200, res);
+  await sendToken(user, 200, res, "login");
 });
+
+const forgotPassword = asyncHandler(async (req, res, next) => {});
+const resetPassword = asyncHandler(async (req, res, next) => {});
 
 module.exports = {
   registerUser,
   loginUser,
+  forgotPassword,
+  resetPassword,
 };

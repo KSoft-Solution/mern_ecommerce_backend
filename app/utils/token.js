@@ -1,7 +1,8 @@
 // Create Token and saving in cookie
 const sendEmail = require("../utils/mail.util");
-const sendToken = (user, statusCode, res) => {
+const sendToken = (user, statusCode, res,option) => {
   const token = user.getJWTToken();
+  let templete;
 
   // options for cookie
   const options = {
@@ -10,8 +11,11 @@ const sendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
   };
+  if(option === 'login') templete = 'login'
+  else if(option === 'register') templete = 'register'
 
-  sendEmail(user.email, "register", "", user.name, token);
+
+  sendEmail(user.email, templete, "", user.name, token);
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
     user,
